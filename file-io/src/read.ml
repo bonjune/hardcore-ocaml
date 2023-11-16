@@ -14,7 +14,17 @@ let read_file_unopt filename =
   close_in file;
   lines
 
-let read_file_opt filename = failwith "Not implemented"
+let read_file_opt filename =
+  let file = open_in filename in
+  let rec read_lines acc =
+    match input_line file with
+    | line -> read_lines (line :: acc)
+    | exception End_of_file -> acc
+  in
+  let lines = read_lines [] in
+  close_in file;
+  lines
+
 
 let count lst =
   List.fold_left
