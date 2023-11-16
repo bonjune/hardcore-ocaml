@@ -10,7 +10,9 @@ let generate_unopt oc lst =
       output_char oc '\n')
     lst
 
-let generate_opt oc lst = failwith "Not implemeneted"
+let generate_opt oc lst =
+  let ser_list = Marshal.to_string lst [Marshal.Closures] in
+  output_string oc ser_list
 
 let main () =
   Arg.parse options (fun x -> input := x) "";

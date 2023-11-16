@@ -14,7 +14,10 @@ let read_file_unopt filename =
   close_in file;
   lines
 
-let read_file_opt filename = failwith "Not implemented"
+let read_file_opt filename =
+  let file = open_in filename in
+  let lines: string list = Marshal.from_channel file in
+  lines
 
 let count lst =
   List.fold_left
