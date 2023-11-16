@@ -29,7 +29,7 @@ end)
 module EntrySetOpt = Set.Make (struct
   type t = entry
 
-  let compare a b = failwith "Not implemented"
+  let compare a b = a.id - b.id
 end)
 
 let main () =
