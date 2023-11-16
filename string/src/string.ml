@@ -3,7 +3,18 @@ let input = ref ""
 let options = [ ("-opt", Arg.Set opt, "Optimized version") ]
 let long_list n = List.init n (fun _ -> Random.int 10000000)
 let to_string_unopt lst = List.fold_left (fun s n -> s ^ string_of_int n) "" lst
-let to_string_opt lst = failwith "Not implemented"
+
+
+
+let to_string_opt lst =
+  let rec iter lst acc =
+    match lst with
+    | [] -> acc
+    | hd :: tl -> iter tl (string_of_int hd :: acc)
+  in
+
+  iter lst []
+  |> String.concat ""
 
 let main () =
   Arg.parse options (fun x -> input := x) "";
