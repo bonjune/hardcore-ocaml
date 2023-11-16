@@ -10,8 +10,12 @@ let filter_unopt lst =
       Str.string_match regexp n 0)
     lst
 
-let filter_opt lst = failwith "Not implemented"
-
+let filter_opt lst =
+  let regexp = Str.regexp ".*9.*9.*" in
+  List.filter
+    (fun n ->
+      Str.string_match regexp n 0)
+    lst
 let main () =
   Arg.parse options (fun x -> input := x) "";
   let n = int_of_string !input in
