@@ -7,10 +7,15 @@ let non_empty_list = List.init 10000 Fun.id
 let long_list n =
   List.init n (fun _ -> if Random.bool () then empty_list else non_empty_list)
 
+let is_empty = function
+  | [] -> true
+  | _ -> false
+
 let empty_unopt lst =
   List.fold_left (fun n lst -> if List.length lst = 0 then n + 1 else n) 0 lst
 
-let empty_opt lst = failwith "Not implemented"
+let empty_opt lst =
+  List.fold_left (fun n lst -> if is_empty lst then n + 1 else n) 0 lst
 
 let main () =
   Arg.parse options (fun x -> input := x) "";
