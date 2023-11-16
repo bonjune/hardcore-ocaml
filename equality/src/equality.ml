@@ -20,7 +20,13 @@ let count_unopt ll =
   in
   loop ll 0
 
-let count_opt ll = failwith "Not implemented"
+let count_opt ll =
+  let rec loop ll acc =
+    match ll with
+    | [] -> acc
+    | l :: t -> if l == lst1 then acc + 1 |> loop t else loop t acc
+  in
+  loop ll 0
 
 let main () =
   Arg.parse options (fun x -> input := x) "";
